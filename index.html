@@ -49,7 +49,7 @@
       color: whitesmoke;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
-      width: 250px;
+      width: 350px;
     }
 
     #map {
@@ -141,19 +141,17 @@
 </head>
 
 <body>
-  <h1>Unemployment Rate in U.S. Counties: 2001 &mdash; 2015</h1>
+  <h1>Visualizing the U.S. Home Insurance Crisis at the ZIP Code Level</h1>
   <div id="map"></div>
   <div id="ui-controls">
-      <label><span class="min">2001</span><span class="max">2015</span>
-        <input type="range" min="2001" max="2015" value="2001" step="1" class="year-slider">
+      <label><span class="min">2018</span><span class="max">2022</span>
+        <input type="range" min="2018" max="2022" value="2018" step="1" class="year-slider">
       </label>
   </div>
 
   <footer>
-    <p>Map authored by Kenny Stancil</p>
-    <p>Data: <a href='https://data.census.gov/cedsci/'>U.S. Census Bureau</a></p>
-    <p>See my projects on <a href="https://github.com/kwstancil">GitHub</a></p>
-    <p>Visit my <a href='https://kwstancil.github.io/map-portfolio/'>mapping portfolio</a></p>
+    <p>Map: Kenny Stancil, Revolving Door Project</p>
+    <p>Data: <a href='https://home.treasury.gov/news/press-releases/jy2791'>U.S. Treasury Department, Federal Insurance Office</a></p>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
@@ -201,14 +199,14 @@
     ).addTo(map);
 
     // AJAX request for GeoJSON data
-    fetch("data/us-counties.json")
+    fetch("data/us-zip-codes.json")
       .then(function (response) {
         return response.json();
       })
-      .then(function (counties) {
-        console.log(counties);
+      .then(function (zipcodes) {
+        console.log(zipcodes);
 
-        Papa.parse('data/us-unemployment-counties.csv', {
+        Papa.parse('data/fio-insurance-data-cleaned.csv', {
           download: true,
           header: true,
           complete: function(data) {
@@ -217,10 +215,10 @@
             console.log('data: ', data);
 
             // note that counties is also accessible here
-            console.log('counties: ', counties);
+            console.log('zip-codes: ', zipcodes);
 
             // create function to join data and counties
-            processData(counties, data);
+            processData(zipcodes, data);
           }
         }); // end of Papa.parse()
       })
@@ -228,12 +226,12 @@
           console.log(`Ruh roh! An error has occurred`, error);
       });
 
-      function processData(counties, data) {
+      function processData(zipcodes, data) {
 
         // loop through the json
-        for (var county in counties.features) {
+        for (var zipcode in zipcodes.features) {
 
-          var props = counties.features[county].properties;
+          var props = zipcodes.features[zipcode].properties;
 
           //loop through csv data for each county
           for (var d in data.data) {
