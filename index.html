@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>U.S. Unemployment Rates by County: 2001-2015</title>
+  <title>Visualizing the U.S. Home Insurance Crisis at the ZIP Code Level</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -256,7 +256,7 @@
 
             if (!t[prop]) {
               t[prop] = true; // discover that the prop name is county_fip, not county_id
-            } 
+            }
 
             // if the attribute is a number and not one of the fips codes or name
             if (prop != "GEOID" && prop != "STATE_FIP" && prop != "COUNTY_FIP" && prop!= "NAME")  {
@@ -357,8 +357,8 @@
         if (props.NAME) {
           // build the tooltip
         tooltip = `<b>${props['NAME']} County</b><br />`
-        } 
-        
+        }
+
         if (props[currentYear] != 'null' && props[currentYear] != undefined) {
           tooltip += `${props[currentYear]}% Unemployment`;
         } else {
