@@ -154,6 +154,19 @@
     <p>Data: <a href='https://home.treasury.gov/news/press-releases/jy2791'>U.S. Treasury Department, Federal Insurance Office</a></p>
   </footer>
 
+  // legend is outside of container-fluid and will be dynamically added to map
+<div class="bg-secondary py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
+
+// ui is outside of container-fluid and will be dynamically added to map
+<div class="form-group mr-3 mt-3" id="dropdown-ui">
+  <select class="form-select bg-success text-white">
+    <option value="HC01_VC05" selected>percent of population 16+ in civilian labor force</option>
+    <option value="HC01_VC67">percent of civilian labor force employed in private sector</option>
+    <option value="HC01_VC68">percent of civilian labor force employed in public sector</option>
+    <option value="HC01_VC07">percent of civilian labor force unemployed</option>
+  </select>
+</div>
+
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin="">
