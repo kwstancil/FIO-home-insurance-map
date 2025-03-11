@@ -2,443 +2,447 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset='utf-8' />
   <title>Visualizing the U.S. Home Insurance Crisis at the ZIP Code Level</title>
-  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin="" />
-  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+  <!-- maplibre-gl.css here -->
+  <link href="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <!-- Rubik font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
   <style>
+    /* basic css to style the viewer goes here */
     body {
       margin: 0;
       padding: 0;
-      background: whitesmoke;
-      font-family: Lato, sans-serif;
-      color: #0d0000;
-    }
-
-    h1 {
-      position: absolute;
-      z-index: 650;
-      top: 10px;
-      left: 15px;
-      padding: 8px 15px;
-      margin: 0;
-      color: whitesmoke;
-      font-size: 1.5em;
-      background: rgba(25, 25, 25, 0.8);
-      border-radius: 5px;
-    }
-
-    h2 {
-      display: inline-block;
-      color: #001323;
-    }
-
-    footer {
-      position: absolute;
-      z-index: 650;
-      bottom: 10px;
-      right: 15px;
-      padding: 6px 8px;
-      font-size: 1em;
-      background: rgba(75, 75, 75, 0.8);
-      color: whitesmoke;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      width: 350px;
     }
 
     #map {
       position: absolute;
-      width: 100%;
       top: 0;
       bottom: 0;
+      width: 100%;
     }
 
-    p {
-      font-size: 1em;
-      color: whitesmoke;
+    /* set styles for the container holding the title and slider */
+    .session {
+      position: absolute;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.75);
+      border-radius: 3px;
+      box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+      top: 10px;
+      left: 10px;
+      padding: 5px;
     }
 
-    a {
-      color: #209ffa;
-    }
-
-    .legend {
-      padding: 6px 8px;
-      font-size: 1em;
-      background: rgba(75, 75, 75, 0.8);
-      color: whitesmoke;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      width: 160px;
-    }
-
-    .legend h3 {
-      font-size: 1.1em;
-      font-weight: bold;
-      line-height: 1em;
-      color: whitesmoke;
+    /* set styles for the container holding the year legend */
+    .container {
+      display: table;
+      width: 100%;
       margin: 0;
     }
 
-    .legend h3 span {
-      font-size: 1.3em;
-      margin: 0 20px 0 0;
+    /* set font styles for the title */
+    h1 {
+      font-size: 20px;
+      font-family: 'Lato', sans-serif;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      font-weight: normal;
     }
 
-    .legend ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 12px 4px 0;
+    /* set font styles for the identified year */
+    h2 {
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      font-weight: normal;
+      width: 50%;
+      text-align: left;
+      display: table-cell;
     }
 
-    .legend li {
-      list-style-type: none;
-      height: 22px;
+    /* define the slider width and change the cursor to a pointer on hover */
+    #slider {
+      cursor: pointer;
+      width: 275px;
     }
 
-    .legend span {
-      width: 30px;
-      height: 20px;
-      float: left;
-      margin-right: 10px;
+    /* place the dropdown menu in the top right corner next to the navigation control */
+    #layerbar {
+      position: absolute;
+      /* Using absolute positioning is okay if the map container is also positioned */
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.75);
+      /* Slightly more visible */
+      border-radius: 3px;
+      box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+      top: 10px;
+      /* 10px from the top */
+      right: 50px;
+      /* 10px to the left of the navigation control (adjust if needed) */
+      padding: 5px;
+      width: auto;
+      white-space: nowrap;
     }
 
-    #ui-controls {
-      width: 176px;
-      padding: 8px 25px 8px 15px;
-      background: rgba(75, 75, 75, 0.8);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      color: whitesmoke;
+    /* Ensure the select element doesn't stretch */
+    #layerbar select {
+      margin: 0;
     }
 
-    #ui-controls .min {
-      float: left;
+    #legend {
+      background-color: rgba(255, 255, 255, 0.75);
+      border-radius: 3px;
+      bottom: 40px;
+      width: 100px;
+      box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+      font: 12px/20px 'Lato', 'Lato', 'Lato', sans-serif;
+      padding: 10px;
+      position: absolute;
+      right: 10px;
+      z-index: 1;
+      line-height: 18px;
+      color: black;
     }
-
-    #ui-controls .max {
-      float: right;
-      margin-right: -15px;
-    }
-
-    .year-slider {
-      width: 100%;
-    }
-
-    label {
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-
   </style>
 
 </head>
 
 <body>
-  <h1>Visualizing the U.S. Home Insurance Crisis at the ZIP Code Level</h1>
-  <div id="map"></div>
-  <div id="ui-controls">
-      <label><span class="min">2018</span><span class="max">2022</span>
-        <input type="range" min="2018" max="2022" value="2018" step="1" class="year-slider">
-      </label>
+
+  <!-- id the map div -->
+  <div id='map'>
+    <!-- choropleth legend -->
+    <div class='map-overlay' id='legend'></div>
+    <!-- title and time slider -->
+    <div class='session' id='sliderbar'>
+        <!-- the shown title of the map -->
+        <h1>Visualizing the U.S. Home Insurance<br>Crisis at the ZIP Code Level</h1>
+        <div class='container'>
+        <!-- the selected year -->
+        <h2>Year: <label id='active-year'>2018</label></h2>
+        </div>
+        <!-- the slider has a range from 2018 to 2022, intervals of 1 year, and an initial value of 2018 -->
+        <input id='slider' class='row' type='range' min='2018' max='2022' step='1' value='2018' />
+    </div>
+
+    <!-- create a dropdown menu with the title "Select Layer" and three options to choose from -->
+    <div class='dropdown' id='layerbar'>
+        <h1>Select Layer</h1>
+        <select id='layer-select'>
+        <option value='Nonrenewal'>Nonrenewal</option>
+        <option value='Nonpayment_Cancellation'>Nonpayment Cancellation</option>
+        <option value='Other_Than_Nonpayment_Cancellation'>Other Than Nonpayment Cancellation</option>
+        </select>
+    </div>
   </div>
 
-  <footer>
-    <p>Map: Kenny Stancil, Revolving Door Project</p>
-    <p>Data: <a href='https://home.treasury.gov/news/press-releases/jy2791'>U.S. Treasury Department, Federal Insurance Office</a></p>
-  </footer>
+  <!-- maplibre-gl.js library -->
+  <script src="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.js"></script>
+  <!-- pmtiles.js library -->
+  <script src="https://unpkg.com/pmtiles@4.3.0/dist/pmtiles.js"></script>
+  <!-- chroma.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin="">
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
-    integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer">
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"
-    integrity="sha512-8TVPS0EFkkmtT6yPb5K4csnSt3tjbKRrs0F8gvTNKv2OxOcwDO7+Klkz86gMVrzfqtZos5N2a+k+r9D+hlccmQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer">
-  </script>
 
   <script>
-    // map options
-    const options = {
-      scrollWheelZoom: true,
-      zoomSnap: 0.1,
-      dragging: true,
-      zoomControl: false,
-      // center: [39.6, -94.46],
-      // zoom: 4,
-      // Manually set zoom and center to avoid map spanning the world
-      // or set bounds on a predefined extent, map.fitBounds([[40, -100], [-40, -70]])
-    };
+    let protocol = new pmtiles.Protocol({
+      metadata: true
+    });
+    maplibregl.addProtocol("pmtiles", protocol.tile);
 
-    // create the Leaflet map
-    const map = L.map("map", options);
+    // define the map
+    const map = new maplibregl.Map({
+      container: 'map',
+      center: [-94.46, 39.6],
+      zoom: 1,
+      minZoom: 0,
+      maxZoom: 15,
+      style: 'style/alidade_smooth.json'
+    });
 
-    map.fitBounds([[45, -125], [30, -65]]) // diagonal corners on the bounding rectangle
+    // fit the map to the United States
+    map.fitBounds([
+      [-125.0, 24.0],
+      [-66.0, 50.0]
+    ]);
 
-    // request tiles and add to map
-    const tiles = L.tileLayer(
-      "http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}", {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        subdomains: "abcd",
-        ext: "png",
-      }
-    ).addTo(map);
+    // add the navigation control
+    map.addControl(new maplibregl.NavigationControl({
+      visualizePitch: true,
+      showZoom: true,
+      showCompass: true
+    }));
 
-    // AJAX request for GeoJSON data
-    fetch("data/us-zipcodes.json")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (zipcodes) {
-        console.log(zipcodes);
+    // add the scale control
+    map.addControl(new maplibregl.ScaleControl({
+      position: 'bottom-left',
+      unit: 'imperial'
+    }));
 
-        Papa.parse('data/fio-insurance-data-cleaned.csv', {
-          download: true,
-          header: true,
-          complete: function(data) {
+    // define the slider
+    const slider = document.getElementById('slider');
+    // get the value from the slider
+    let initialYear = slider.value;
 
-            // data is accessible to us here
-            console.log('data: ', data);
+    // define the dropdown menu
+    const layerSelect = document.getElementById('layer-select');
+    // get the value from the dropdown
+    let dropdownValue = layerSelect.value;
 
-            // note that zipcodes is also accessible here
-            console.log('zipcodes: ', zipcodes);
+    // define the initial layer
+    let initialLayer = `${initialYear}_${dropdownValue}_Rate`;
 
-            // create function to join data and zipcodes
-            processData(zipcodes, data);
-          }
-        }); // end of Papa.parse()
-      })
-      .catch(function (error) {
-          console.log(`Ruh roh! An error has occurred`, error);
+    // define breaks and colors
+    const breaks = [0, 0.15, 1.39, 16.04];
+
+
+    // function to update the fill-color style
+    function updateLayerStyle() {
+      map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+        'case',
+        ['all', ['>=', ['get', initialLayer], 0],
+          ['<', ['get', initialLayer], 0.44]
+        ], '#fef0d9', // rate between 0 and 0.44
+        ['all', ['>=', ['get', initialLayer], 0.44],
+          ['<', ['get', initialLayer], 0.96]
+        ], '#fdcc8a', // rate between 0.44 and 0.96
+        ['all', ['>=', ['get', initialLayer], 0.96],
+          ['<', ['get', initialLayer], 1.39]
+        ], '#fc8d59', // rate between 0.96 and 1.39
+        ['all', ['>=', ['get', initialLayer], 1.39],
+          ['<', ['get', initialLayer], 2.08]
+        ], '#e34a33', // rate between 1.39 and 2.08
+        ['all', ['>=', ['get', initialLayer], 2.08],
+          ['<=', ['get', initialLayer], 20.69]
+        ], '#b30000', // rate between 2.08 and 20.69
+        'rgba(0,0,0,0)' // Default color if none of the above ranges match
+      ]);
+    }
+
+    // on map load...
+    map.on('load', () => {
+      let popup = new maplibregl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+      let hoveredStateId = null;
+      let hoveredStateZipId = null;
+
+      // add the data source
+      map.addSource('uszipcodes', {
+        type: 'vector',
+        url: 'pmtiles://data/uszipcodes.pmtiles'
       });
 
-      function processData(zipcodes, data) {
+      map.addLayer({
+        'id': 'uszipcodes-fill',
+        'type': 'fill',
+        'source': 'uszipcodes',
+        'source-layer': 'uszipcodes',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'minzoom': 0,
+        'maxzoom': 16,
+        'paint': {
+          'fill-color': [
+            'case',
+            ['all', ['>=', ['get', initialLayer], 0],
+              ['<', ['get', initialLayer], 0.44]
+            ], '#fef0d9', // rate between 0 and 0.44
+            ['all', ['>=', ['get', initialLayer], 0.44],
+              ['<', ['get', initialLayer], 0.96]
+            ], '#fdcc8a', // rate between 0.44 and 0.96
+            ['all', ['>=', ['get', initialLayer], 0.96],
+              ['<', ['get', initialLayer], 1.39]
+            ], '#fc8d59', // rate between 0.96 and 1.39
+            ['all', ['>=', ['get', initialLayer], 1.39],
+              ['<', ['get', initialLayer], 2.08]
+            ], '#e34a33', // rate between 1.39 and 2.08
+            ['all', ['>=', ['get', initialLayer], 2.08],
+              ['<=', ['get', initialLayer], 20.69]
+            ], '#b30000', // rate between 2.08 and 20.69
+            'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          ],
+          'fill-opacity': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false], 0.75, // If hovered, set opacity to 0.75
+            0.5 // Default opacity is 0.5
+          ]
+        }
+      });
 
-        // loop through the json
-        for (var zipcode in zipcodes.features) {
-
-          var props = zipcodes.features[zipcode].properties;
-
-          //loop through csv data for each zipcode
-          for (var d in data.data) {
-
-            if (props.ZCTA5CE20 = data.data[d].ZIP_Code) {
-              zipcodes.features[zipcode].properties = data.data[d]; // add csv data to json feature's properties
-              break;
-            }
+      // add the border layer (polygon borders)
+      map.addLayer({
+        'id': 'uszipcodes-border',
+        'type': 'line',
+        'source': 'uszipcodes',
+        'source-layer': 'uszipcodes',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'minzoom': 0,
+        'maxzoom': 16,
+        'paint': {
+          'line-color': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false], 'rgba(240, 255, 0, 1)', // If hovered, set color to yellow
+            'rgba(0,0,0,1)' // Default color is black
+          ],
+          // set the border width based on the zoom level
+          'line-width': {
+            'base': 1.5, // Optional base scaling factor
+            'stops': [
+              [0, 0.1], // At zoom level 0, the line width will be 0.1
+              [15, 1.5] // At zoom level 15, the line width will be 1.5
+            ]
           }
         }
+      });
 
-        // create empty array to store all the data values
-        const rates = [];
-        const t = {}
-        // iterate through all the zipcodes
-        zipcodes.features.forEach(function(zipcode) {
-
-          // iterate through all the props of each zipcode
-          for (const prop in zipcode.properties) {
-
+      // add mouseover effect for the border layer
+      map.on('mousemove', 'uszipcodes-border', (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+        if (e.features.length > 0) {
+          if (hoveredStateId !== null) {
+            map.setFeatureState({
+              source: 'uszipcodes',
+              sourceLayer: 'uszipcodes',
+              id: hoveredStateId
+            }, {
+              hover: false
+            });
           }
-        });
-
-        // verify the result!
-        console.log(t,rates.sort((a, b) => b - a));
-
-        // create class breaks
-        var breaks = chroma.limits(rates, 'q', 5);
-
-        // create color generator function
-        var colorize = chroma.scale(chroma.brewer.OrRd)
-                .classes(breaks)
-                .mode('lab');
-
-        console.log(colorize) // function (a){var b; return b=s(u(a)), m&&b[m]?b[m]():b}
-
-      // call to draw the map
-      drawMap(zipcodes, colorize);
-
-      // call to draw the legend
-      drawLegend(breaks, colorize);
-
-    } // end processData()
-
-    function drawMap(zipcodes, colorize) {
-
-        // create Leaflet object with geometry data and add to map
-        const dataLayer = L.geoJson(zipcodes, {
-          style: function (feature) {
-            return {
-              color: "black",
-              weight: 1,
-              fillOpacity: 1,
-              fillColor: "#1f78b4"
-            };
-          },
-
-          // add hover/touch functionality to each feature layer
-          onEachFeature: function (feature, layer) {
-            // when mousing over a layer
-            layer.on("mouseover", function () {
-              // change the stroke color and bring that element to the front
-              layer
-                .setStyle({
-                  color: "#40ff00",
-                })
-                .bringToFront();
-            });
-
-            // on mousing off layer
-            layer.on("mouseout", function () {
-              // reset the layer style to its original stroke color
-              layer.setStyle({
-                color: "black",
-              });
-            });
-          },
-        }).addTo(map);
-
-        // first set the zoom/center to the dataLayer's extent with padding
-        // map.fitBounds(dataLayer.getBounds());
-
-        // then back the zoom level off a bit (because we're viewing the map in full screen)
-        // map.setZoom(map.getZoom() - .2);
-
-        //create the slider
-        createSliderUI(dataLayer, colorize);
-
-        //call to initially color the map with first timestamp
-        updateMap(dataLayer, colorize, '2018');
-
-    } // end drawMap()
-
-    function updateMap(dataLayer, colorize, currentYear) {
-
-      // loop through each zipcode layer to update the color
-      dataLayer.eachLayer(function (layer) {
-
-        // refer to propoerties
-        const props = layer.feature.properties;
-
-        // update layer color based on timestamp
-        layer.setStyle({
-          fillColor: colorize(Number(props[currentYear]))
-        });
-
-        let tooltip = ''
-        if (props.NAME) {
-          // build the tooltip
-        tooltip = `<b>${props['NAME']} ZIP Code</b><br />`
+          hoveredStateId = e.features[0].id;
+          map.setFeatureState({
+            source: 'uszipcodes',
+            sourceLayer: 'uszipcodes',
+            id: hoveredStateId
+          }, {
+            hover: true
+          });
         }
+      });
 
-        if (props[currentYear] != 'null' && props[currentYear] != undefined) {
-          tooltip += `${props[currentYear]}%`;
+      map.on('mouseleave', 'uszipcodes-border', () => {
+        map.getCanvas().style.cursor = '';
+        if (hoveredStateId !== null) {
+          map.setFeatureState({
+            source: 'uszipcodes',
+            sourceLayer: 'uszipcodes',
+            id: hoveredStateId
+          }, {
+            hover: false
+          });
+        }
+        hoveredStateId = null;
+      });
+
+      // add mouseover effect for the fill layer
+      map.on('mousemove', 'uszipcodes-fill', (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+        if (e.features.length > 0) {
+          if (hoveredStateZipId !== null) {
+            map.setFeatureState({
+              source: 'uszipcodes',
+              sourceLayer: 'uszipcodes',
+              id: hoveredStateZipId
+            }, {
+              hover: false
+            });
+          }
+          hoveredStateZipId = e.features[0].id;
+          map.setFeatureState({
+            source: 'uszipcodes',
+            sourceLayer: 'uszipcodes',
+            id: hoveredStateZipId
+          }, {
+            hover: true
+          });
+        }
+        // define the properties of the hovered ZIP code
+        let props = e.features[0].properties;
+        // get the ZIP code value
+        let zip = props.ZIP_Code;
+        // declare the rate variable
+        let rate;
+        // check if the rate is -1 (no data) and set the rate variable accordingly
+        if (props[initialLayer] === -1) {
+          rate = 'No Data';
         } else {
-          tooltip += 'No data available'
+          rate = props[initialLayer];
         }
-        // bind tooltip to layer
-        layer.bindTooltip(tooltip, {
-          sticky: false,
-        });
-      });
-    } // end updateMap()
-
-    function drawLegend(breaks, colorize) {
-
-      // create a Leaflet control for the legend
-      const legendControl = L.control({
-        position: 'topright'
+        // set the popup location and content
+        popup.setLngLat(e.lngLat)
+          .setHTML(`<b>ZIP Code</b><br>${zip}<br><b>Rate</b><br>${rate}`)
+          .addTo(map);
       });
 
-      // when the control is added to the map
-      legendControl.onAdd = function (map) {
+      map.on('mouseleave', 'uszipcodes-fill', () => {
+        map.getCanvas().style.cursor = '';
+        if (hoveredStateZipId !== null) {
+          map.setFeatureState({
+            source: 'uszipcodes',
+            sourceLayer: 'uszipcodes',
+            id: hoveredStateZipId
+          }, {
+            hover: false
+          });
+        }
+        hoveredStateZipId = null;
+        // remove the popup when the mouse leaves the ZIP code
+        popup.remove();
+      });
 
-          // create a new division element with class of 'legend' and return
-          const legend = L.DomUtil.create('div', 'legend');
-          return legend;
-      };
+    });
 
-      // add the legend control to the map
-      legendControl.addTo(map);
+    // add event listeners for the slider and dropdown
+    slider.addEventListener('input', () => {
+      initialYear = slider.value;
+      initialLayer = `${initialYear}_${dropdownValue}_Rate`; // update the initialLayer value
+      updateLayerStyle(); // update the layer style based on new values
+    });
 
-      // select div and create legend title
-      const legend = document.querySelector('.legend')
-      legend.innerHTML = "<h3><span>2018</span> Nonrenewal Rate</h3><ul>";
+    layerSelect.addEventListener('change', () => {
+      dropdownValue = layerSelect.value;
+      initialLayer = `${initialYear}_${dropdownValue}_Rate`; // update the initialLayer value
+      updateLayerStyle(); // update the layer style based on new values
+    });
 
-      // loop through the break values
-      for (let i = 0; i <breaks.length - 1; i++) {
-
-        // determine color values
-        const color = colorize(breaks[i], breaks);
-
-        // create legend item
-        const classRange = `<li><span style="background:${color}"></span>
-                            ${breaks[i].toLocaleString()}% &mdash;
-                            ${breaks[i + 1].toLocaleString()}%</li>`
-
-        // append to legend unordered list item
-        legend.innerHTML += classRange;
+      // Add the legend
+      const legend = document.getElementById('legend');
+      const colors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
+      const labels = ['0-0.43', '0.44-0.95', '0.96-1.38', '1.39-2.07', '2.08-20.69'];
+      const legendTitle = document.createElement('label');
+      legendTitle.style.fontWeight = 'bold';
+      legendTitle.style.margin = '0 0 5px';
+      legendTitle.textContent = 'Rates per 100 Households';
+      legend.appendChild(legendTitle);
+      for (let i = 0; i < colors.length; i++) {
+        const div = document.createElement('div');
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.marginBottom = '5px';
+        const color = document.createElement('div');
+        color.style.width = '20px';
+        color.style.height = '20px';
+        color.style.backgroundColor = colors[i];
+        color.style.borderRadius = '50%';
+        color.style.marginRight = '5px';
+        div.appendChild(color);
+        const label = document.createElement('span');
+        label.style.fontFamily = 'Lato';
+        label.style.fontSize = '11px';
+        label.textContent = labels[i];
+        div.appendChild(label);
+        legend.appendChild(div);
       }
-      // close legend unordered list
-      legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
-
-    } // end drawLegend()
-
-    function createSliderUI(dataLayer, colorize) {
-
-      // create Leaflet control for the slider
-      const sliderControl = L.control({
-          position: 'bottomleft'
-      });
-
-      // when added to the map
-      sliderControl.onAdd = function (map) {
-
-        // select an existing DOM elemend with an id of "ui-controls"
-        const slider = L.DomUtil.get("ui-controls");
-
-        // disable scrolling of map while using controls
-        L.DomEvent.disableScrollPropagation(slider);
-
-        // disable click events while using controls
-        L.DomEvent.disableClickPropagation(slider);
-
-        // return the slider fromt the onAdd method
-        return slider;
-      }
-
-      // add the control to the map
-      sliderControl.addTo(map);
-
-      // select the form element
-      const slider = document.querySelector(".year-slider");
-
-      // listen for changes on input element
-      slider.addEventListener("input", function (e) {
-          // get the value of the selected option
-          const currentYear = e.target.value;
-          // update the map with current timestamp
-          updateMap(dataLayer, colorize, currentYear);
-          // update timestamp in legend heading
-          document.querySelector(".legend h3 span").innerHTML = currentYear;
-      });
-
-    } // end createSliderUI()
-
   </script>
-</body>
 
-</html>
+</body>
