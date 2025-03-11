@@ -125,10 +125,10 @@
         <h1>Visualizing the U.S. Home Insurance<br>Crisis at the ZIP Code Level, 2018-2022</h1>
         <div class='container'>
         <!-- the selected year -->
-        <h2>Year: <label id='active-year'>2018</label></h2>
-        </div>
+        <h2>Year: <label><span class="min">2018</span><span class = "max">2022</span></h2>
         <!-- the slider has a range from 2018 to 2022, intervals of 1 year, and an initial value of 2018 -->
-        <input id='slider' class='row' type='range' min='2018' max='2022' step='1' value='2018' />
+        <input type='range' min='2018' max='2022' value='2018' step='1' class='slider'> </label>
+        </div>
     </div>
 
     <!-- create a dropdown menu with the title "Select Layer" and three options to choose from -->
