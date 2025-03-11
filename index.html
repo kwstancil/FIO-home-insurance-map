@@ -122,7 +122,7 @@
     <!-- title and time slider -->
     <div class='session' id='sliderbar'>
         <!-- the shown title of the map -->
-        <h1>Visualizing the U.S. Home Insurance<br>Crisis at the ZIP Code Level</h1>
+        <h1>Visualizing the U.S. Home Insurance<br>Crisis at the ZIP Code Level, 2018-2022</h1>
         <div class='container'>
         <!-- the selected year -->
         <h2>Year: <label id='active-year'>2018</label></h2>
@@ -143,7 +143,7 @@
   </div>
 
   <footer>
-    <p>Map: Kenny Stancil, Revolving Door Project</p>
+    <p>Map: Kenny Stancil, Revolving Door Project and Jay Bowen, North Carolina State University</p>
     <p>Data: <a href='https://home.treasury.gov/news/press-releases/jy2791'>U.S. Treasury Department, Federal Insurance Office</a></p>
   </footer>
 
@@ -423,11 +423,11 @@
       // Add the legend
       const legend = document.getElementById('legend');
       const colors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-      const labels = ['0-0.43', '0.44-0.95', '0.96-1.38', '1.39-2.07', '2.08-20.69'];
+      const labels = ['0%-0.43%', '0.44%-0.95%', '0.96%-1.38%', '1.39%-2.07%', '2.08%-20.69%'];
       const legendTitle = document.createElement('label');
       legendTitle.style.fontWeight = 'bold';
       legendTitle.style.margin = '0 0 5px';
-      legendTitle.textContent = 'Rates per 100 Households';
+      legendTitle.textContent = 'Rate';
       legend.appendChild(legendTitle);
       for (let i = 0; i < colors.length; i++) {
         const div = document.createElement('div');
