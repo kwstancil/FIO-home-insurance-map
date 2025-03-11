@@ -6,9 +6,6 @@
   <title>Visualizing the U.S. Home Insurance Crisis at the ZIP Code Level</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-  <!-- API key here -->
-  <link href = https://api.stadiamaps.com/tz/lookup/v1?lat=59.43696&lng=24.75357&api_key=184459e8-0088-4be8-b3c1-abf57f5abe7d />
-
   <!-- maplibre-gl.css here -->
   <link href="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.css" rel="stylesheet" />
   <!-- Rubik font -->
@@ -166,7 +163,7 @@
       zoom: 1,
       minZoom: 0,
       maxZoom: 15,
-      style: 'style/alidade_smooth.json'
+      style: 'https://tiles.stadiamaps.com/styles/alidade_smooth.json?key=184459e8-0088-4be8-b3c1-abf57f5abe7d'
     });
 
     // fit the map to the United States
