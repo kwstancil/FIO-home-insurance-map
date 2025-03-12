@@ -265,7 +265,7 @@
       zoom: 1,
       minZoom: 0,
       maxZoom: 15,
-      style: 'https://api.maptiler.com/maps/basic-v2-light/style.json?key=AcE4mDnIiEf0GshOlFWA'
+      style: 'https://api.maptiler.com/maps/toner-v2-lite/style.json?key=AcE4mDnIiEf0GshOlFWA'
     });
 
     // fit the map to the United States
@@ -300,10 +300,6 @@
     // define the initial layer
     let initialLayer = `${initialYear}_${dropdownValue}_Rate`;
 
-    // define breaks and colors
-    const breaks = [0, 0.15, 1.39, 16.04];
-
-
     // function to update the fill-color style
     function updateLayerStyle() {
       map.setPaintProperty('uszipcodes-fill', 'fill-color', [
@@ -329,6 +325,17 @@
 
     // on map load...
     map.on('load', () => {
+
+      const layers = map.getStyle().layers;
+            // Find the index of the first symbol layer in the map style
+            let firstSymbolId;
+            for (const layer of layers) {
+              if (layer.type === 'symbol') {
+                firstSymbolId = layer.id;
+                break;
+              }
+            }
+
       let popup = new maplibregl.Popup({
         closeButton: false,
         closeOnClick: false
@@ -378,7 +385,7 @@
             0.5 // Default opacity is 0.5
           ]
         }
-      });
+      }, firstSymbolId);
 
       // add the border layer (polygon borders)
       map.addLayer({
@@ -478,11 +485,11 @@
         if (props[initialLayer] === -1) {
           rate = 'No Data';
         } else {
-          rate = props[initialLayer];
+          rate = props[initialLayer] + '%';
         }
         // set the popup location and content
         popup.setLngLat(e.lngLat)
-          .setHTML(`<b>ZIP Code</b><br>${zip}<br><b>Percent</b><br>${rate}`)
+          .setHTML(`<b>ZIP Code</b><br>${zip}<br><b>Rate</b><br>${rate}`)
           .addTo(map);
       });
 
@@ -509,6 +516,7 @@
       initialYear = slider.value;
       initialLayer = `${initialYear}_${dropdownValue}_Rate`; // update the initialLayer value
       updateLayerStyle(); // update the layer style based on new values
+      document.getElementById('active-year').textContent = initialYear; // update the active year label
     });
 
     layerSelect.addEventListener('change', () => {
