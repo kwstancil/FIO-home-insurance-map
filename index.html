@@ -305,8 +305,8 @@
 
       if (initialLayer === `${initialYear}_Nonrenewal_Rate`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color',
+        ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<', ['get', initialLayer], 0.57]
           ], '#fef0d9', // rate between 0 and 0.57
@@ -328,8 +328,8 @@
 
       if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<', ['get', initialLayer], 0.85]
           ], '#fef0d9', // rate between 0 and 0.85
@@ -351,8 +351,8 @@
 
       if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<', ['get', initialLayer], 0.62]
           ], '#fef0d9', // rate between 0 and 0.62
@@ -374,8 +374,8 @@
       
       if (initialLayer === `${initialYear}_Claim_Frequency`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<', ['get', initialLayer], 4.15]
           ], '#fef0d9', // rate between 0 and 4.15
@@ -397,8 +397,8 @@
 
       if (initialLayer === `${initialYear}_Claim_Severity`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        ['case',
           ['all', ['>=', ['get', initialLayer], -792,532],
             ['<', ['get', initialLayer], 17,207]
           ], '#fef0d9', // rate between -792,532 and 17,207
@@ -420,8 +420,8 @@
 
       if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        ['case',
           ['all', ['>=', ['get', initialLayer], -7,387.01],
             ['<', ['get', initialLayer], 62.13]
           ], '#fef0d9', // rate between -7,387.01 and 62.13
@@ -443,8 +443,8 @@
 
       if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-          'case',
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<', ['get', initialLayer], 1,728]
           ], '#fef0d9', // rate between 0 and 1,728
@@ -505,23 +505,159 @@
         'paint': {
           'fill-color': [
             'case',
-            ['all', ['>=', ['get', initialLayer], 0],
-              ['<', ['get', initialLayer], 0.44]
-            ], '#fef0d9', // rate between 0 and 0.44
-            ['all', ['>=', ['get', initialLayer], 0.44],
-              ['<', ['get', initialLayer], 0.96]
-            ], '#fdcc8a', // rate between 0.44 and 0.96
-            ['all', ['>=', ['get', initialLayer], 0.96],
-              ['<', ['get', initialLayer], 1.39]
-            ], '#fc8d59', // rate between 0.96 and 1.39
-            ['all', ['>=', ['get', initialLayer], 1.39],
-              ['<', ['get', initialLayer], 2.08]
-            ], '#e34a33', // rate between 1.39 and 2.08
-            ['all', ['>=', ['get', initialLayer], 2.08],
-              ['<=', ['get', initialLayer], 20.69]
-            ], '#b30000', // rate between 2.08 and 20.69
-            'rgba(0,0,0,0)' // Default color if none of the above ranges match
+
+            ['==', initialLayer, `${initialYear}_Nonrenewal_Rate`],
+            // Custom color breaks for the Nonrenewal Rate layer
+
+            ['case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 0.57]
+          ], '#fef0d9', // rate between 0 and 0.57
+          ['all', ['>=', ['get', initialLayer], 0.58],
+            ['<', ['get', initialLayer], 1.71]
+          ], '#fdcc8a', // rate between 0.58 and 1.71
+          ['all', ['>=', ['get', initialLayer], 1.72],
+            ['<', ['get', initialLayer], 4.14]
+          ], '#fc8d59', // rate between 1.72 and 4.14
+          ['all', ['>=', ['get', initialLayer], 4.15],
+            ['<', ['get', initialLayer], 13.06]
+          ], '#e34a33', // rate between 4.15 and 13.06
+          ['all', ['>=', ['get', initialLayer], 13.07],
+            ['<=', ['get', initialLayer], 47.03]
+          ], '#b30000', // rate between 13.07 and 47.03
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
+            ['==', initialLayer, `${initialYear}_Nonpayment_Cancellation_Rate`],
+            // Custom color breaks for the Nonpayment Cancellation Rate layer
+            
+            ['case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 0.85]
+          ], '#fef0d9', // rate between 0 and 0.85
+          ['all', ['>=', ['get', initialLayer], 0.86],
+            ['<', ['get', initialLayer], 2.27]
+          ], '#fdcc8a', // rate between 0.86 and 2.27
+          ['all', ['>=', ['get', initialLayer], 2.28],
+            ['<', ['get', initialLayer], 4.58]
+          ], '#fc8d59', // rate between 2.28 and 4.58
+          ['all', ['>=', ['get', initialLayer], 4.59],
+            ['<', ['get', initialLayer], 12.01]
+          ], '#e34a33', // rate between 4.59 and 12.01
+          ['all', ['>=', ['get', initialLayer], 12.02],
+            ['<=', ['get', initialLayer], 47.03]
+          ], '#b30000', // rate between 12.02 and 47.03
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
+            ['==', initialLayer, `${initialYear}_Other_Cancellation_Rate`],
+            // Custom color breaks for the Other Cancellation Rate layer
+            
+            ['case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 0.62]
+          ], '#fef0d9', // rate between 0 and 0.62
+          ['all', ['>=', ['get', initialLayer], 0.63],
+            ['<', ['get', initialLayer], 1.64]
+          ], '#fdcc8a', // rate between 0.63 and 1.64
+          ['all', ['>=', ['get', initialLayer], 1.65],
+            ['<', ['get', initialLayer], 2.96]
+          ], '#fc8d59', // rate between 1.65 and 2.96
+          ['all', ['>=', ['get', initialLayer], 2.97],
+            ['<', ['get', initialLayer], 6.30]
+          ], '#e34a33', // rate between 2.97 and 6.30
+          ['all', ['>=', ['get', initialLayer], 6.31],
+            ['<=', ['get', initialLayer], 33.60]
+          ], '#b30000', // rate between 6.31 and 33.60
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
+            ['==', initialLayer, `${initialYear}_Claim_Frequency`],
+            // Custom color breaks for the Claim_Frequency layer
+            ['case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 4.15]
+          ], '#fef0d9', // rate between 0 and 4.15
+          ['all', ['>=', ['get', initialLayer], 4.16],
+            ['<', ['get', initialLayer], 12.10]
+          ], '#fdcc8a', // rate between 4.16 and 12.10
+          ['all', ['>=', ['get', initialLayer], 12.11],
+            ['<', ['get', initialLayer], 32.03]
+          ], '#fc8d59', // rate between 12.11 and 32.03
+          ['all', ['>=', ['get', initialLayer], 32.04],
+            ['<', ['get', initialLayer], 77.37]
+          ], '#e34a33', // rate between 32.04 and 77.37
+          ['all', ['>=', ['get', initialLayer], 77.38],
+            ['<=', ['get', initialLayer], 200.47]
+          ], '#b30000', // rate between 77.38 and 200.47
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
+            ['==', initialLayer, `${initialYear}_Claim_Severity`],
+            // Custom color breaks for the Average Claim Amount layer
+            ['case',
+          ['all', ['>=', ['get', initialLayer], -792,532],
+            ['<', ['get', initialLayer], 17,207]
+          ], '#fef0d9', // rate between -792,532 and 17,207
+          ['all', ['>=', ['get', initialLayer], 17,208],
+            ['<', ['get', initialLayer], 54,947]
+          ], '#fdcc8a', // rate between 17,208 and 54,947
+          ['all', ['>=', ['get', initialLayer], 54,948],
+            ['<', ['get', initialLayer], 158,374]
+          ], '#fc8d59', // rate between 54,948 and 158,374
+          ['all', ['>=', ['get', initialLayer], 158,375],
+            ['<', ['get', initialLayer], 484,845]
+          ], '#e34a33', // rate between 158,375 and 484,845
+          ['all', ['>=', ['get', initialLayer], 484,846],
+            ['<=', ['get', initialLayer], 4,076,826]
+          ], '#b30000', // rate between 484,846 and 4,076,826
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
+            ['==', initialLayer, `${initialYear}_Paid_Loss_Ratio`],
+            // Custom color breaks for the Paid Loss Ratio layer
+            ['case',
+          ['all', ['>=', ['get', initialLayer], -7,387.01],
+            ['<', ['get', initialLayer], 62.13]
+          ], '#fef0d9', // rate between -7,387.01 and 62.13
+          ['all', ['>=', ['get', initialLayer], 62.14],
+            ['<', ['get', initialLayer], 238.54]
+          ], '#fdcc8a', // rate between 62.14 and 238.54
+          ['all', ['>=', ['get', initialLayer], 238.55],
+            ['<', ['get', initialLayer], 765.98]
+          ], '#fc8d59', // rate between 238.55 and 765.98
+          ['all', ['>=', ['get', initialLayer], 765.99],
+            ['<', ['get', initialLayer], 3,066.73]
+          ], '#e34a33', // rate between 765.99 and 3,066.73
+          ['all', ['>=', ['get', initialLayer], 3,066.74],
+            ['<=', ['get', initialLayer], 31,783.18]
+          ], '#b30000', // rate between 3,066.74 and 31,783.18
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
+            ['==', initialLayer, `${initialYear}_Premiums_Per_Policy`],
+            // Custom color breaks for the Average Premium layer
+            ['case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 1,728]
+          ], '#fef0d9', // rate between 0 and 1,728
+          ['all', ['>=', ['get', initialLayer], 1,729],
+            ['<', ['get', initialLayer], 3,194]
+          ], '#fdcc8a', // rate between 1.729 and 3,194
+          ['all', ['>=', ['get', initialLayer], 3,195],
+            ['<', ['get', initialLayer], 7,048]
+          ], '#fc8d59', // rate between 3,195 and 7,048
+          ['all', ['>=', ['get', initialLayer], 7,049],
+            ['<', ['get', initialLayer], 19,273]
+          ], '#e34a33', // rate between 7,049 and 19,273
+          ['all', ['>=', ['get', initialLayer], 19,274],
+            ['<=', ['get', initialLayer], 40,719]
+          ], '#b30000', // rate between 19,274 and 40,719
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ],
+
           ],
+
           'fill-opacity': [
             'case',
             ['boolean', ['feature-state', 'hover'], false], 0.75, // If hovered, set opacity to 0.75
@@ -625,7 +761,7 @@
         // declare the rate variable
         let rate;
         // check if the rate is -1 (no data) and set the rate variable accordingly
-        if (props[initialLayer] === -1) {
+        if (props[initialLayer] === -99999) {
           rate = 'No Data';
         } else {
           rate = props[initialLayer] + '%';
