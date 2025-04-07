@@ -298,7 +298,7 @@
     let dropdownValue = layerSelect.value;
 
     // define the initial layer
-    let initialLayer = `${initialYear}_${dropdownValue}_Rate`;
+    let initialLayer = `${initialYear}_${dropdownValue}`;
 
     // function to update the fill-color style
     function updateLayerStyle() {
@@ -514,14 +514,14 @@
     // add event listeners for the slider and dropdown
     slider.addEventListener('input', () => {
       initialYear = slider.value;
-      initialLayer = `${initialYear}_${dropdownValue}_Rate`; // update the initialLayer value
+      initialLayer = `${initialYear}_${dropdownValue}`; // update the initialLayer value
       updateLayerStyle(); // update the layer style based on new values
       document.getElementById('active-year').textContent = initialYear; // update the active year label
     });
 
     layerSelect.addEventListener('change', () => {
       dropdownValue = layerSelect.value;
-      initialLayer = `${initialYear}_${dropdownValue}_Rate`; // update the initialLayer value
+      initialLayer = `${initialYear}_${dropdownValue}`; // update the initialLayer value
       updateLayerStyle(); // update the layer style based on new values
     });
 
