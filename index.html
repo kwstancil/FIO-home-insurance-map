@@ -445,21 +445,21 @@
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', [
           'case',
-          ['all', ['>=', ['get', initialLayer], -7,387.01],
-            ['<', ['get', initialLayer], 62.13]
-          ], '#fef0d9', // rate between -7,387.01 and 62.13
-          ['all', ['>=', ['get', initialLayer], 62.14],
-            ['<', ['get', initialLayer], 238.54]
-          ], '#fdcc8a', // rate between 62.14 and 238.54
-          ['all', ['>=', ['get', initialLayer], 238.55],
-            ['<', ['get', initialLayer], 765.98]
-          ], '#fc8d59', // rate between 238.55 and 765.98
-          ['all', ['>=', ['get', initialLayer], 765.99],
-            ['<', ['get', initialLayer], 3,066.73]
-          ], '#e34a33', // rate between 765.99 and 3,066.73
-          ['all', ['>=', ['get', initialLayer], 3,066.74],
-            ['<=', ['get', initialLayer], 31,783.18]
-          ], '#b30000', // rate between 3,066.74 and 31,783.18
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 1,728]
+          ], '#fef0d9', // rate between 0 and 1,728
+          ['all', ['>=', ['get', initialLayer], 1,729],
+            ['<', ['get', initialLayer], 3,194]
+          ], '#fdcc8a', // rate between 1.729 and 3,194
+          ['all', ['>=', ['get', initialLayer], 3,195],
+            ['<', ['get', initialLayer], 7,048]
+          ], '#fc8d59', // rate between 3,195 and 7,048
+          ['all', ['>=', ['get', initialLayer], 7,049],
+            ['<', ['get', initialLayer], 19,273]
+          ], '#e34a33', // rate between 7,049 and 19,273
+          ['all', ['>=', ['get', initialLayer], 19,274],
+            ['<=', ['get', initialLayer], 40,719]
+          ], '#b30000', // rate between 19,274 and 40,719
           'rgba(0,0,0,0)' // Default color if none of the above ranges match
         ]);
       } 
