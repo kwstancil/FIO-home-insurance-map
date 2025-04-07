@@ -331,7 +331,7 @@
         ]);
       }
 
-      if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
+      else if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -354,7 +354,7 @@
         ]);
       }
 
-      if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
+      else if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -377,7 +377,7 @@
         ]);
       }
       
-      if (initialLayer === `${initialYear}_Claim_Frequency`) {
+      else if (initialLayer === `${initialYear}_Claim_Frequency`) {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -400,7 +400,7 @@
         ]);
       } 
 
-      if (initialLayer === `${initialYear}_Claim_Severity`) {
+      else if (initialLayer === `${initialYear}_Claim_Severity`) {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -423,7 +423,7 @@
         ]);
       } 
 
-      if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
+      else if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -446,7 +446,7 @@
         ]);
       } 
 
-      if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
+      else if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -859,37 +859,37 @@
         title = nonrenewalTitle;
       }
 
-      if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
+      else if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
         colors = nonpaymentCancellationColors;
         labels = nonpaymentCancellationLabels;
         title = nonpaymentCancellationTitle;
       }
 
-      if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
+      else if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
         colors = claimFrequencyColors;
         labels = claimFrequencyLabels;
         title = claimFrequencyTitle;
       }
       
-      if (initialLayer === `${initialYear}_Claim_Frequency`) {
+      else if (initialLayer === `${initialYear}_Claim_Frequency`) {
         colors = claimFrequencyColors;
         labels = claimFrequencyLabels;
         title = claimFrequencyTitle;
       }
 
-      if (initialLayer === `${initialYear}_Claim_Severity`) {
+      else if (initialLayer === `${initialYear}_Claim_Severity`) {
         colors = claimFrequencyColors;
         labels = claimFrequencyLabels;
         title = claimFrequencyTitle;
       }
 
-      if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
+      else if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
         colors = claimFrequencyColors;
         labels = claimFrequencyLabels;
         title = claimFrequencyTitle;
       }
 
-      if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
+      else if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
         colors = claimFrequencyColors;
         labels = claimFrequencyLabels;
         title = claimFrequencyTitle;
