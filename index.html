@@ -232,8 +232,8 @@
     <div class='dropdown' id='layerbar'>
         <h1>Select Layer</h1>
         <select id='layer-select'>
-            <option class="dropval" value='Nonrenewal'>Nonrenewal Rate</option>
-            <option class="dropval" value='Nonpayment_Cancellation'>Nonpayment Cancellation Rate</option>
+            <option class="dropval" value='Nonrenewal_Rate'>Nonrenewal Rate</option>
+            <option class="dropval" value='Nonpayment_Cancellation_Rate'>Nonpayment Cancellation Rate</option>
             <option class="dropval" value='Other_Than_Nonpayment_Cancellation'>Other Cancellation Rate</option>
         </select>
     </div>
@@ -302,25 +302,168 @@
 
     // function to update the fill-color style
     function updateLayerStyle() {
-      map.setPaintProperty('uszipcodes-fill', 'fill-color', [
-        'case',
-        ['all', ['>=', ['get', initialLayer], 0],
-          ['<', ['get', initialLayer], 0.44]
-        ], '#fef0d9', // rate between 0 and 0.44
-        ['all', ['>=', ['get', initialLayer], 0.44],
-          ['<', ['get', initialLayer], 0.96]
-        ], '#fdcc8a', // rate between 0.44 and 0.96
-        ['all', ['>=', ['get', initialLayer], 0.96],
-          ['<', ['get', initialLayer], 1.39]
-        ], '#fc8d59', // rate between 0.96 and 1.39
-        ['all', ['>=', ['get', initialLayer], 1.39],
-          ['<', ['get', initialLayer], 2.08]
-        ], '#e34a33', // rate between 1.39 and 2.08
-        ['all', ['>=', ['get', initialLayer], 2.08],
-          ['<=', ['get', initialLayer], 20.69]
-        ], '#b30000', // rate between 2.08 and 20.69
-        'rgba(0,0,0,0)' // Default color if none of the above ranges match
-      ]);
+
+      if (initialLayer === `${initialYear}_Nonrenewal_Rate`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 0.57]
+          ], '#fef0d9', // rate between 0 and 0.57
+          ['all', ['>=', ['get', initialLayer], 0.58],
+            ['<', ['get', initialLayer], 1.71]
+          ], '#fdcc8a', // rate between 0.58 and 1.71
+          ['all', ['>=', ['get', initialLayer], 1.72],
+            ['<', ['get', initialLayer], 4.14]
+          ], '#fc8d59', // rate between 1.72 and 4.14
+          ['all', ['>=', ['get', initialLayer], 4.15],
+            ['<', ['get', initialLayer], 13.06]
+          ], '#e34a33', // rate between 4.15 and 13.06
+          ['all', ['>=', ['get', initialLayer], 13.07],
+            ['<=', ['get', initialLayer], 47.03]
+          ], '#b30000', // rate between 13.07 and 47.03
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      }
+
+      if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 0.85]
+          ], '#fef0d9', // rate between 0 and 0.85
+          ['all', ['>=', ['get', initialLayer], 0.86],
+            ['<', ['get', initialLayer], 2.27]
+          ], '#fdcc8a', // rate between 0.86 and 2.27
+          ['all', ['>=', ['get', initialLayer], 2.28],
+            ['<', ['get', initialLayer], 4.58]
+          ], '#fc8d59', // rate between 2.28 and 4.58
+          ['all', ['>=', ['get', initialLayer], 4.59],
+            ['<', ['get', initialLayer], 12.01]
+          ], '#e34a33', // rate between 4.59 and 12.01
+          ['all', ['>=', ['get', initialLayer], 12.02],
+            ['<=', ['get', initialLayer], 47.03]
+          ], '#b30000', // rate between 12.02 and 47.03
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      }
+
+      if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 0.62]
+          ], '#fef0d9', // rate between 0 and 0.62
+          ['all', ['>=', ['get', initialLayer], 0.63],
+            ['<', ['get', initialLayer], 1.64]
+          ], '#fdcc8a', // rate between 0.63 and 1.64
+          ['all', ['>=', ['get', initialLayer], 1.65],
+            ['<', ['get', initialLayer], 2.96]
+          ], '#fc8d59', // rate between 1.65 and 2.96
+          ['all', ['>=', ['get', initialLayer], 2.97],
+            ['<', ['get', initialLayer], 6.30]
+          ], '#e34a33', // rate between 2.97 and 6.30
+          ['all', ['>=', ['get', initialLayer], 6.31],
+            ['<=', ['get', initialLayer], 33.60]
+          ], '#b30000', // rate between 6.31 and 33.60
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      }
+      
+      if (initialLayer === `${initialYear}_Claim_Frequency`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], 0],
+            ['<', ['get', initialLayer], 4.15]
+          ], '#fef0d9', // rate between 0 and 4.15
+          ['all', ['>=', ['get', initialLayer], 4.16],
+            ['<', ['get', initialLayer], 12.10]
+          ], '#fdcc8a', // rate between 4.16 and 12.10
+          ['all', ['>=', ['get', initialLayer], 12.11],
+            ['<', ['get', initialLayer], 32.03]
+          ], '#fc8d59', // rate between 12.11 and 32.03
+          ['all', ['>=', ['get', initialLayer], 32.04],
+            ['<', ['get', initialLayer], 77.37]
+          ], '#e34a33', // rate between 32.04 and 77.37
+          ['all', ['>=', ['get', initialLayer], 77.38],
+            ['<=', ['get', initialLayer], 200.47]
+          ], '#b30000', // rate between 77.38 and 200.47
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      } 
+
+      if (initialLayer === `${initialYear}_Claim_Severity`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], -792,532],
+            ['<', ['get', initialLayer], 17,207]
+          ], '#fef0d9', // rate between -792,532 and 17,207
+          ['all', ['>=', ['get', initialLayer], 17,208],
+            ['<', ['get', initialLayer], 54,947]
+          ], '#fdcc8a', // rate between 17,208 and 54,947
+          ['all', ['>=', ['get', initialLayer], 54,948],
+            ['<', ['get', initialLayer], 158,374]
+          ], '#fc8d59', // rate between 54,948 and 158,374
+          ['all', ['>=', ['get', initialLayer], 158,375],
+            ['<', ['get', initialLayer], 484,845]
+          ], '#e34a33', // rate between 158,375 and 484,845
+          ['all', ['>=', ['get', initialLayer], 484,846],
+            ['<=', ['get', initialLayer], 4,076,826]
+          ], '#b30000', // rate between 484,846 and 4,076,826
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      } 
+
+      if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], -7,387.01],
+            ['<', ['get', initialLayer], 62.13]
+          ], '#fef0d9', // rate between -7,387.01 and 62.13
+          ['all', ['>=', ['get', initialLayer], 62.14],
+            ['<', ['get', initialLayer], 238.54]
+          ], '#fdcc8a', // rate between 62.14 and 238.54
+          ['all', ['>=', ['get', initialLayer], 238.55],
+            ['<', ['get', initialLayer], 765.98]
+          ], '#fc8d59', // rate between 238.55 and 765.98
+          ['all', ['>=', ['get', initialLayer], 765.99],
+            ['<', ['get', initialLayer], 3,066.73]
+          ], '#e34a33', // rate between 765.99 and 3,066.73
+          ['all', ['>=', ['get', initialLayer], 3,066.74],
+            ['<=', ['get', initialLayer], 31,783.18]
+          ], '#b30000', // rate between 3,066.74 and 31,783.18
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      } 
+
+      if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
+        // Apply different color breaks for this special case
+        map.setPaintProperty('uszipcodes-fill', 'fill-color', [
+          'case',
+          ['all', ['>=', ['get', initialLayer], -7,387.01],
+            ['<', ['get', initialLayer], 62.13]
+          ], '#fef0d9', // rate between -7,387.01 and 62.13
+          ['all', ['>=', ['get', initialLayer], 62.14],
+            ['<', ['get', initialLayer], 238.54]
+          ], '#fdcc8a', // rate between 62.14 and 238.54
+          ['all', ['>=', ['get', initialLayer], 238.55],
+            ['<', ['get', initialLayer], 765.98]
+          ], '#fc8d59', // rate between 238.55 and 765.98
+          ['all', ['>=', ['get', initialLayer], 765.99],
+            ['<', ['get', initialLayer], 3,066.73]
+          ], '#e34a33', // rate between 765.99 and 3,066.73
+          ['all', ['>=', ['get', initialLayer], 3,066.74],
+            ['<=', ['get', initialLayer], 31,783.18]
+          ], '#b30000', // rate between 3,066.74 and 31,783.18
+          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+        ]);
+      } 
+
     }
 
     // on map load...
