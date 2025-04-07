@@ -114,7 +114,7 @@
       background-color: rgba(255, 255, 255, 0.75);
       border-radius: 3px;
       bottom: 40px;
-      width: 100px;
+      width: 150px;
       box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
       font: 12px/20px 'Lato', 'Lato', 'Lato', sans-serif;
       padding: 10px;
@@ -294,8 +294,8 @@
     // define the slider
     const slider = document.getElementById('slider');
     // get the value from the slider
-    let initialYear = 2018;
-    slider.value = initialYear
+    let initialYear = slider.value;
+    slider.value = 2018
 
     // define the dropdown menu
     const layerSelect = document.getElementById('layer-select');
@@ -813,37 +813,37 @@
 
     // Define the colors and labels for the Nonrenewal Rate layer
     const nonrenewalColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const nonrenewalLabels = ['0%-0.57%', '0.58%-1.71%', '1.72%-4.14%', '4.15%-13.06%', '13.06%-47.03%'];
+    const nonrenewalLabels = ['0% - 0.57%', '0.58% - 1.71%', '1.72% - 4.14%', '4.15% - 13.06%', '13.07% - 47.03%'];
     const nonrenewalTitle = 'Nonrenewal Rate';
 
     // Define the colors and labels for the Nonpayment Cancellation Rate layer
     const nonpaymentCancellationColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const nonpaymentCancellationLabels = ['0%-0.85%', '0.86%-2.27%', '2.28%-4.58%', '4.59%-12.01%', '12.02%-47.03%'];
+    const nonpaymentCancellationLabels = ['0% - 0.85%', '0.86% - 2.27%', '2.28% - 4.58%', '4.59% - 12.01%', '12.02% - 47.03%'];
     const nonpaymentCancellationTitle = 'Nonpayment Cancellation Rate';
 
     // Define the colors and labels for the Other Cancellation Rate layer
     const otherCancellationColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const otherCancellationLabels = ['0%-0.62%', '0.63%-1.64%', '1.65%-2.96%', '2.97%-6.30%', '6.31%-33.60%'];
+    const otherCancellationLabels = ['0% - 0.62%', '0.63% - 1.64%', '1.65% - 2.96%', '2.97% - 6.30%', '6.31% - 33.60%'];
     const otherCancellationTitle = 'Other Cancellation Rate';
 
     // Define the colors and labels for the Claim Frequency Rate layer
     const claimFrequencyColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const claimFrequencyLabels = ['0%-4.15%', '4.16%-12.10%', '12.11%-32.03%', '32.04%-77.37%', '77.38%-200.47%'];
+    const claimFrequencyLabels = ['0% - 4.15%', '4.16% - 12.10%', '12.11% - 32.03%', '32.04% - 77.37%', '77.38% - 200.47%'];
     const claimFrequencyTitle = 'Claim Frequency Rate';
 
     // Define the colors and labels for the Average Claim Amount layer
     const claimSeverityColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const claimSeverityLabels = ['$-792,532-$17,207', '$17,208-$54,947', '$54,948-$158,374', '$158,375-$484,845', '$484,846-$4,076,826'];
+    const claimSeverityLabels = ['$-792,532 - $17,207', '$17,208 - $54,947', '$54,948 - $158,374', '$158,375 - $484,845', '$484,846 - $4,076,826'];
     const claimSeverityTitle = 'Average Claim Amount';
 
     // Define the colors and labels for the Paid Loss Ratio layer
     const paidLossRatioColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const paidLossRatioLabels = ['-7,387.01-62.13', '62.14-238.54', '238.55-765.98', '765.99-3,066.73', '3,066.74-31,783.18'];
+    const paidLossRatioLabels = ['-7,387.01 - 62.13', '62.14 - 238.54', '238.55 - 765.98', '765.99 - 3,066.73', '3,066.74 - 31,783.18'];
     const paidLossRatioTitle = 'Paid Loss Ratio';
 
     // Define the colors and labels for the Average Premium layer
     const averagePremiumColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const averagePremiumLabels = ['$0-$1,728', '$1,729-$3,194', '$3,195-$7,048', '$7,049-$19,273', '$19,274-$40,719'];
+    const averagePremiumLabels = ['$0 - $1,728', '$1,729 - $3,194', '$3,195 - $7,048', '$7,049 - $19,273', '$19,274 - $40,719'];
     const averagePremiumTitle = 'Average Premium';
 
     // Function to update the legend based on the initialLayer
