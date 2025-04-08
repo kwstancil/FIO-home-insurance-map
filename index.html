@@ -114,7 +114,7 @@
       background-color: rgba(255, 255, 255, 0.75);
       border-radius: 3px;
       bottom: 40px;
-      width: 150px;
+      width: 170px;
       box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
       font: 12px/20px 'Lato', 'Lato', 'Lato', sans-serif;
       padding: 10px;
@@ -206,7 +206,6 @@
             color: black;
           }
         }
-
   </style>
 
 </head>
@@ -295,6 +294,7 @@
     const slider = document.getElementById('slider');
     // get the value from the slider
     let initialYear = slider.value;
+    // set the slider value to the initial year
     slider.value = 2018
 
     // define the dropdown menu
@@ -446,7 +446,7 @@
         ]);
       } 
 
-      else if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
+      else {
         // Apply different color breaks for this special case
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
@@ -639,8 +639,7 @@
           'rgba(0,0,0,0)' // Default color if none of the above ranges match
         ],
 
-            ['==', initialLayer, `${initialYear}_Premiums_Per_Policy`],
-            // Custom color breaks for the Average Premium layer
+            // Default case
             ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<', ['get', initialLayer], 1728]
@@ -764,18 +763,35 @@
         let zip = props.ZIP_Code;
         // declare the rate variable
         let rate;
-        // check if the rate is -1 (no data) and set the rate variable accordingly
+        // check if the rate is -99999 (no data) and set the rate variable accordingly
         if (props[initialLayer] === -99999) {
           rate = 'No Data';
         } else {
-          rate = props[initialLayer] + '%';
+          // check initialLayer and format the rate variable accordingly
+          if (initialLayer === `${initialYear}_Claim_Severity`) {
+            rate = '$' + props[initialLayer].toLocaleString();
+          } else if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
+            rate = '$' + props[initialLayer].toLocaleString();
+          } else {
+            rate = props[initialLayer].toLocaleString() + '%';
+          }
         }
-        // set the popup location and content
-        popup.setLngLat(e.lngLat)
+        // set the popup location and content based on the initialLayer
+        if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
+          popup.setLngLat(e.lngLat)
+          .setHTML(`<b>ZIP Code</b><br>${zip}<br><b>Ratio</b><br>${rate}`)
+          .addTo(map);
+        } else if (initialLayer === `${initialYear}_Claim_Severity` || initialLayer === `${initialYear}_Premiums_Per_Policy`) {
+          popup.setLngLat(e.lngLat)
+          .setHTML(`<b>ZIP Code</b><br>${zip}<br><b>Dollars</b><br>${rate}`)
+          .addTo(map);
+        } else {
+          popup.setLngLat(e.lngLat)
           .setHTML(`<b>ZIP Code</b><br>${zip}<br><b>Rate</b><br>${rate}`)
           .addTo(map);
+        }
       });
-
+ 
       map.on('mouseleave', 'uszipcodes-fill', () => {
         map.getCanvas().style.cursor = '';
         if (hoveredStateZipId !== null) {
@@ -806,6 +822,7 @@
       dropdownValue = layerSelect.value;
       initialLayer = `${initialYear}_${dropdownValue}`; // update the initialLayer value
       updateLayerStyle(); // update the layer style based on new values
+      updateLegend();
     });
 
       // Add the legend
@@ -838,7 +855,7 @@
 
     // Define the colors and labels for the Paid Loss Ratio layer
     const paidLossRatioColors = ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'];
-    const paidLossRatioLabels = ['-7,387.01 - 62.13', '62.14 - 238.54', '238.55 - 765.98', '765.99 - 3,066.73', '3,066.74 - 31,783.18'];
+    const paidLossRatioLabels = ['-7,387.01% - 62.13%', '62.14% - 238.54%', '238.55% - 765.98%', '765.99% - 3,066.73%', '3,066.74% - 31,783.18%'];
     const paidLossRatioTitle = 'Paid Loss Ratio';
 
     // Define the colors and labels for the Average Premium layer
