@@ -29,7 +29,7 @@
     .session {
       position: absolute;
       z-index: 1;
-      background-color: rgba(255, 255, 255, 0.75);
+      background-color: rgba(255, 255, 255, 0.5);
       border-radius: 3px;
       box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
       top: 10px;
@@ -663,8 +663,8 @@
 
           'fill-opacity': [
             'case',
-            ['boolean', ['feature-state', 'hover'], false], 0.75, // If hovered, set opacity to 0.75
-            0.5 // Default opacity is 0.5
+            ['boolean', ['feature-state', 'hover'], false], 0.9, // If hovered, set opacity to 0.9
+            0.75 // Default opacity is 0.75
           ]
         }
       }, firstSymbolId);
@@ -683,7 +683,7 @@
         'paint': {
           'line-color': [
             'case',
-            ['boolean', ['feature-state', 'hover'], false], 'rgba(240, 255, 0, 1)', // If hovered, set color to yellow
+            ['boolean', ['feature-state', 'hover'], false], 'rgba(0, 150, 255, 1)', // If hovered, set color to blue
             'rgba(0,0,0,1)' // Default color is black
           ],
           // set the border width based on the zoom level
