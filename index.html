@@ -386,7 +386,7 @@
           ], '#ffffb2', // rate between 0 and 4.15
           ['all', ['>=', ['get', initialLayer], 4.16],
             ['<=', ['get', initialLayer], 12.10]
-          ], '##fecc5c', // rate between 4.16 and 12.10
+          ], '#fecc5c', // rate between 4.16 and 12.10
           ['all', ['>=', ['get', initialLayer], 12.11],
             ['<=', ['get', initialLayer], 32.03]
           ], '#fd8d3c', // rate between 12.11 and 32.03
@@ -577,7 +577,7 @@
         ],
 
             ['==', initialLayer, `${initialYear}_Claim_Frequency`],
-            // Custom color breaks for the Claim_Frequency layer
+            // Custom color breaks for the Claim Frequency layer
             ['case',
           ['all', ['>=', ['get', initialLayer], 0],
             ['<=', ['get', initialLayer], 4.15]
