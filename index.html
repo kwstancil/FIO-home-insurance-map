@@ -327,7 +327,7 @@
           ['all', ['>=', ['get', initialLayer], 13.07],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 13.07 and 47.03
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       }
 
@@ -350,7 +350,7 @@
           ['all', ['>=', ['get', initialLayer], 12.02],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 12.02 and 47.03
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       }
 
@@ -373,7 +373,7 @@
           ['all', ['>=', ['get', initialLayer], 6.31],
             ['<=', ['get', initialLayer], 33.60]
           ], '#bd0026', // rate between 6.31 and 33.60
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       }
       
@@ -396,7 +396,7 @@
           ['all', ['>=', ['get', initialLayer], 77.38],
             ['<=', ['get', initialLayer], 200.47]
           ], '#bd0026', // rate between 77.38 and 200.47
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       } 
 
@@ -419,7 +419,7 @@
           ['all', ['>=', ['get', initialLayer], 484846],
             ['<=', ['get', initialLayer], 4076826]
           ], '#bd0026', // rate between 484,846 and 4,076,826
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       } 
 
@@ -442,7 +442,7 @@
           ['all', ['>=', ['get', initialLayer], 3066.74],
             ['<=', ['get', initialLayer], 31783.18]
           ], '#bd0026', // rate between 3,066.74 and 31,783.18
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       } 
 
@@ -465,7 +465,7 @@
           ['all', ['>=', ['get', initialLayer], 19274],
             ['<=', ['get', initialLayer], 40719]
           ], '#bd0026', // rate between 19,274 and 40,719
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ]);
       }
     }
@@ -529,7 +529,7 @@
           ['all', ['>=', ['get', initialLayer], 13.07],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 13.07 and 47.03
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Nonpayment_Cancellation_Rate`],
@@ -551,7 +551,7 @@
           ['all', ['>=', ['get', initialLayer], 12.02],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 12.02 and 47.03
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Other_Cancellation_Rate`],
@@ -573,7 +573,7 @@
           ['all', ['>=', ['get', initialLayer], 6.31],
             ['<=', ['get', initialLayer], 33.60]
           ], '#bd0026', // rate between 6.31 and 33.60
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Claim_Frequency`],
@@ -594,7 +594,7 @@
           ['all', ['>=', ['get', initialLayer], 77.38],
             ['<=', ['get', initialLayer], 200.47]
           ], '#bd0026', // rate between 77.38 and 200.47
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Claim_Severity`],
@@ -615,7 +615,7 @@
           ['all', ['>=', ['get', initialLayer], 484846],
             ['<=', ['get', initialLayer], 4076826]
           ], '#bd0026', // rate between 484,846 and 4,076,826
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Paid_Loss_Ratio`],
@@ -636,7 +636,7 @@
           ['all', ['>=', ['get', initialLayer], 3066.74],
             ['<=', ['get', initialLayer], 31783.18]
           ], '#bd0026', // rate between 3,066.74 and 31,783.18
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
             // Default case
@@ -656,7 +656,7 @@
           ['all', ['>=', ['get', initialLayer], 19274],
             ['<=', ['get', initialLayer], 40719]
           ], '#bd0026', // rate between 19,274 and 40,719
-          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.15)' // Default color if none of the above ranges match
         ],
 
           ],
@@ -829,38 +829,38 @@
       const legend = document.getElementById('legend');
 
     // Define the colors and labels for the Nonrenewal Rate layer
-    const nonrenewalColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const nonrenewalLabels = ['0% - 0.57%', '0.58% - 1.71%', '1.72% - 4.14%', '4.15% - 13.06%', '13.07% - 47.03%'];
+    const nonrenewalColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const nonrenewalLabels = ['0% - 0.57%', '0.58% - 1.71%', '1.72% - 4.14%', '4.15% - 13.06%', '13.07% - 47.03%', 'No Data'];
     const nonrenewalTitle = 'Nonrenewal Rate';
 
     // Define the colors and labels for the Nonpayment Cancellation Rate layer
-    const nonpaymentCancellationColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const nonpaymentCancellationLabels = ['0% - 0.85%', '0.86% - 2.27%', '2.28% - 4.58%', '4.59% - 12.01%', '12.02% - 47.03%'];
+    const nonpaymentCancellationColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const nonpaymentCancellationLabels = ['0% - 0.85%', '0.86% - 2.27%', '2.28% - 4.58%', '4.59% - 12.01%', '12.02% - 47.03%', 'No Data'];
     const nonpaymentCancellationTitle = 'Nonpayment Cancellation Rate';
 
     // Define the colors and labels for the Other Cancellation Rate layer
-    const otherCancellationColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const otherCancellationLabels = ['0% - 0.62%', '0.63% - 1.64%', '1.65% - 2.96%', '2.97% - 6.30%', '6.31% - 33.60%'];
+    const otherCancellationColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const otherCancellationLabels = ['0% - 0.62%', '0.63% - 1.64%', '1.65% - 2.96%', '2.97% - 6.30%', '6.31% - 33.60%', 'No Data'];
     const otherCancellationTitle = 'Other Cancellation Rate';
 
     // Define the colors and labels for the Claim Frequency Rate layer
-    const claimFrequencyColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const claimFrequencyLabels = ['0% - 4.15%', '4.16% - 12.10%', '12.11% - 32.03%', '32.04% - 77.37%', '77.38% - 200.47%'];
+    const claimFrequencyColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const claimFrequencyLabels = ['0% - 4.15%', '4.16% - 12.10%', '12.11% - 32.03%', '32.04% - 77.37%', '77.38% - 200.47%', 'No Data'];
     const claimFrequencyTitle = 'Claim Frequency Rate';
 
     // Define the colors and labels for the Average Claim Amount layer
-    const claimSeverityColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const claimSeverityLabels = ['$-792,532 - $17,207', '$17,208 - $54,947', '$54,948 - $158,374', '$158,375 - $484,845', '$484,846 - $4,076,826'];
+    const claimSeverityColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const claimSeverityLabels = ['$-792,532 - $17,207', '$17,208 - $54,947', '$54,948 - $158,374', '$158,375 - $484,845', '$484,846 - $4,076,826', 'No Data'];
     const claimSeverityTitle = 'Average Claim Amount';
 
     // Define the colors and labels for the Paid Loss Ratio layer
-    const paidLossRatioColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const paidLossRatioLabels = ['-7,387.01% - 62.13%', '62.14% - 238.54%', '238.55% - 765.98%', '765.99% - 3,066.73%', '3,066.74% - 31,783.18%'];
+    const paidLossRatioColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const paidLossRatioLabels = ['-7,387.01% - 62.13%', '62.14% - 238.54%', '238.55% - 765.98%', '765.99% - 3,066.73%', '3,066.74% - 31,783.18%', 'No Data'];
     const paidLossRatioTitle = 'Paid Loss Ratio';
 
     // Define the colors and labels for the Average Premium layer
-    const averagePremiumColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-    const averagePremiumLabels = ['$0 - $1,728', '$1,729 - $3,194', '$3,195 - $7,048', '$7,049 - $19,273', '$19,274 - $40,719'];
+    const averagePremiumColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
+    const averagePremiumLabels = ['$0 - $1,728', '$1,729 - $3,194', '$3,195 - $7,048', '$7,049 - $19,273', '$19,274 - $40,719', 'No Data'];
     const averagePremiumTitle = 'Average Premium';
 
     // Function to update the legend based on the initialLayer
