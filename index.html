@@ -268,7 +268,7 @@
       zoom: 1,
       minZoom: 0,
       maxZoom: 15,
-      style: 'https://api.maptiler.com/maps/toner-v2-lite/style.json?key=AcE4mDnIiEf0GshOlFWA'
+      style: 'https://api.maptiler.com/maps/toner-v2-lite/style.json?key=vMrOamZaZNCemOlyBx20'
     });
 
     // fit the map to the United States
@@ -327,7 +327,7 @@
           ['all', ['>=', ['get', initialLayer], 13.07],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 13.07 and 47.03
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       }
 
@@ -350,7 +350,7 @@
           ['all', ['>=', ['get', initialLayer], 12.02],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 12.02 and 47.03
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       }
 
@@ -373,7 +373,7 @@
           ['all', ['>=', ['get', initialLayer], 6.31],
             ['<=', ['get', initialLayer], 33.60]
           ], '#bd0026', // rate between 6.31 and 33.60
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       }
       
@@ -396,7 +396,7 @@
           ['all', ['>=', ['get', initialLayer], 77.38],
             ['<=', ['get', initialLayer], 200.47]
           ], '#bd0026', // rate between 77.38 and 200.47
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       } 
 
@@ -419,7 +419,7 @@
           ['all', ['>=', ['get', initialLayer], 484846],
             ['<=', ['get', initialLayer], 4076826]
           ], '#bd0026', // rate between 484,846 and 4,076,826
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       } 
 
@@ -442,7 +442,7 @@
           ['all', ['>=', ['get', initialLayer], 3066.74],
             ['<=', ['get', initialLayer], 31783.18]
           ], '#bd0026', // rate between 3,066.74 and 31,783.18
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       } 
 
@@ -465,7 +465,7 @@
           ['all', ['>=', ['get', initialLayer], 19274],
             ['<=', ['get', initialLayer], 40719]
           ], '#bd0026', // rate between 19,274 and 40,719
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ]);
       }
     }
@@ -529,7 +529,7 @@
           ['all', ['>=', ['get', initialLayer], 13.07],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 13.07 and 47.03
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Nonpayment_Cancellation_Rate`],
@@ -551,7 +551,7 @@
           ['all', ['>=', ['get', initialLayer], 12.02],
             ['<=', ['get', initialLayer], 47.03]
           ], '#bd0026', // rate between 12.02 and 47.03
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Other_Cancellation_Rate`],
@@ -573,7 +573,7 @@
           ['all', ['>=', ['get', initialLayer], 6.31],
             ['<=', ['get', initialLayer], 33.60]
           ], '#bd0026', // rate between 6.31 and 33.60
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Claim_Frequency`],
@@ -594,7 +594,7 @@
           ['all', ['>=', ['get', initialLayer], 77.38],
             ['<=', ['get', initialLayer], 200.47]
           ], '#bd0026', // rate between 77.38 and 200.47
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Claim_Severity`],
@@ -615,7 +615,7 @@
           ['all', ['>=', ['get', initialLayer], 484846],
             ['<=', ['get', initialLayer], 4076826]
           ], '#bd0026', // rate between 484,846 and 4,076,826
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
             ['==', initialLayer, `${initialYear}_Paid_Loss_Ratio`],
@@ -636,7 +636,7 @@
           ['all', ['>=', ['get', initialLayer], 3066.74],
             ['<=', ['get', initialLayer], 31783.18]
           ], '#bd0026', // rate between 3,066.74 and 31,783.18
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
             // Default case
@@ -656,7 +656,7 @@
           ['all', ['>=', ['get', initialLayer], 19274],
             ['<=', ['get', initialLayer], 40719]
           ], '#bd0026', // rate between 19,274 and 40,719
-          'rgba(0,0,0,0)' // Default color if none of the above ranges match
+          'rgba(0,0,0,0.2)' // Default color if none of the above ranges match
         ],
 
           ],
