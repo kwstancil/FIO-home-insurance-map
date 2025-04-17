@@ -269,7 +269,7 @@
       zoom: 1,
       minZoom: 0,
       maxZoom: 15,
-      style: 'https://api.maptiler.com/maps/019635a5-5e59-7ab4-8f9d-186dab504828/style.json?key=AcE4mDnIiEf0GshOlFWA'
+      style: 'https://api.maptiler.com/maps/019635a5-5e59-7ab4-8f9d-186dab504828/style.json?key=vMrOamZaZNCemOlyBx20'
     });
 
     // fit the map to the United States
@@ -403,10 +403,10 @@
 
       else if (initialLayer === `${initialYear}_Claim_Severity`) {
         // Apply different color breaks for this special case
-        map.setPaintProperty('uszipcodes-fill', 'fill-color', 
+        map.setPaintProperty('uszipcodes-fill', 'fill-color',
         ['case',
           ['all', ['>=', ['get', initialLayer], -792532],
-            ['<=', ['get', initialLayer], 17207]
+            ['<=', ['get', initialLayer], 17207,]
           ], '#ffffb2', // rate between -792,532 and 17,207
           ['all', ['>=', ['get', initialLayer], 17208],
             ['<=', ['get', initialLayer], 54947]
