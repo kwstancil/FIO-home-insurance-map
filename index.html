@@ -406,8 +406,11 @@
         map.setPaintProperty('uszipcodes-fill', 'fill-color',
         ['case',
           ['all', ['>=', ['get', initialLayer], -792532],
+            ['<=', ['get', initialLayer], -100000,]
+          ], '#ffffb2', // rate between -792,532 and -100,000
+          ['all', ['>=', ['get', initialLayer], -99998],
             ['<=', ['get', initialLayer], 17207,]
-          ], '#ffffb2', // rate between -792,532 and 17,207
+          ], '#ffffb2', // rate between -99,998 and 17,207
           ['all', ['>=', ['get', initialLayer], 17208],
             ['<=', ['get', initialLayer], 54947]
           ], '#fecc5c', // rate between 17,208 and 54,947
@@ -601,9 +604,12 @@
             ['==', initialLayer, `${initialYear}_Claim_Severity`],
             // Custom color breaks for the Average Claim Amount layer
             ['case',
-          ['all', ['>=', ['get', initialLayer], -792532],
-            ['<=', ['get', initialLayer], 17207]
-          ], '#ffffb2', // rate between -792,532 and 17,207
+            ['all', ['>=', ['get', initialLayer], -792532],
+            ['<=', ['get', initialLayer], -100000,]
+          ], '#ffffb2', // rate between -792,532 and -100,000
+          ['all', ['>=', ['get', initialLayer], -99998],
+            ['<=', ['get', initialLayer], 17207,]
+          ], '#ffffb2', // rate between -99,998 and 17,207
           ['all', ['>=', ['get', initialLayer], 17208],
             ['<=', ['get', initialLayer], 54947]
           ], '#fecc5c', // rate between 17,208 and 54,947
