@@ -857,8 +857,9 @@
 
     // Define the colors and labels for the Average Claim Amount layer
     const claimSeverityColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
-    const claimSeverityLabels = ['$-792,532 - $17,207', '$17,208 - $54,947', '$54,948 - $158,374', '$158,375 - $484,845', '$484,846 - $4,076,826', 'No Data'];
+    const claimSeverityLabels = ['Less than $17,207', '$17,208 - $54,947', '$54,948 - $158,374', '$158,375 - $484,845', '$484,846 - $4,076,826', 'No Data'];
     const claimSeverityTitle = 'Average Claim Amount';
+    const claimSeverityNote = 'Note: ZIP codes with negative average claim amounts in a given year may be impacted by subrogation payments received by insurers that year.';
 
     // Define the colors and labels for the Paid Loss Ratio layer
     const paidLossRatioColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
@@ -876,47 +877,54 @@
       legend.innerHTML = '';
 
       // Select the appropriate color and label sets based on initialLayer
-      let colors, labels, title;
+      let colors, labels, title, note;
       if (initialLayer === `${initialYear}_Nonrenewal_Rate`) {
         colors = nonrenewalColors;
         labels = nonrenewalLabels;
         title = nonrenewalTitle;
+        note = null;
       }
 
       else if (initialLayer === `${initialYear}_Nonpayment_Cancellation_Rate`) {
         colors = nonpaymentCancellationColors;
         labels = nonpaymentCancellationLabels;
         title = nonpaymentCancellationTitle;
+        note = null;
       }
 
       else if (initialLayer === `${initialYear}_Other_Cancellation_Rate`) {
         colors = otherCancellationColors;
         labels = otherCancellationLabels;
         title = otherCancellationTitle;
+        note = null;
       }
       
       else if (initialLayer === `${initialYear}_Claim_Frequency`) {
         colors = claimFrequencyColors;
         labels = claimFrequencyLabels;
         title = claimFrequencyTitle;
+        note = null;
       }
 
       else if (initialLayer === `${initialYear}_Claim_Severity`) {
         colors = claimSeverityColors;
         labels = claimSeverityLabels;
         title = claimSeverityTitle;
+        note = claimSeverityNote;
       }
 
       else if (initialLayer === `${initialYear}_Paid_Loss_Ratio`) {
         colors = paidLossRatioColors;
         labels = paidLossRatioLabels;
         title = paidLossRatioTitle;
+        note = null;
       }
 
       else if (initialLayer === `${initialYear}_Premiums_Per_Policy`) {
         colors = averagePremiumColors;
         labels = averagePremiumLabels;
         title = averagePremiumTitle;
+        note = null;
       }
 
       // Create the legend title
@@ -924,7 +932,7 @@
       legendTitle.style.fontWeight = 'bold';
       legendTitle.style.margin = '0 0 5px';
       legendTitle.textContent = title;
-      legend.appendChild(legendTitle);      
+      legend.appendChild(legendTitle);   
 
       // Create the legend items
       for (let i = 0; i < colors.length; i++) {
@@ -952,6 +960,13 @@
         // Add the item to the legend
         legend.appendChild(div);
       }
+
+      // Create the note if it exists
+      const legendNote = document.createElement('label');
+      legendNote.style.fontWeight = 'normal';
+      legendNote.style.margin = '0 0 5px';
+      legendNote.textContent = note;
+      legend.appendChild(legendNote);  
     }
 
     // Call the updateLegend function to initialize the legend
