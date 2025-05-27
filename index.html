@@ -7,7 +7,9 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
   <!-- maplibre-gl.css here -->
-  <link href="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="https://unpkg.com/maplibre-gl@^5.3.1/dist/maplibre-gl.css" rel="stylesheet">
+  <!-- maptiler geocoder.css -->
+   <link href="https://cdn.maptiler.com/maptiler-geocoding-control/v2.1.4/style.css" rel="stylesheet">
   <!-- Rubik font -->
   <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
@@ -205,6 +207,13 @@
             line-height: 18px;
             color: black;
           }
+
+          #gc {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+          }
         }
   </style>
 
@@ -249,7 +258,9 @@
   </footer>
 
   <!-- maplibre-gl.js library -->
-  <script src="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@^5.3.1/dist/maplibre-gl.js"></script>
+  <!-- maptiler geocoder.js library -->
+  <script src="https://cdn.maptiler.com/maptiler-geocoding-control/v2.1.4/maplibregl.umd.js"></script>
   <!-- pmtiles.js library -->
   <script src="https://unpkg.com/pmtiles@4.3.0/dist/pmtiles.js"></script>
   <!-- chroma.js library -->
@@ -257,6 +268,8 @@
 
 
   <script>
+     const key = 'AcE4mDnIiEf0GshOlFWA'
+    
     let protocol = new pmtiles.Protocol({
       metadata: true
     });
@@ -291,6 +304,9 @@
     //  unit: 'imperial'
     // }));
 
+    //define the geocoder
+    const gc = new maplibreglMaptilerGeocoder.GeocodingControl({ apiKey: key });
+    
     // define the slider
     const slider = document.getElementById('slider');
     // get the value from the slider
@@ -971,6 +987,9 @@
 
     // Call the updateLegend function to initialize the legend
     updateLegend();
+
+    map.addControl(gc);
+
   </script>
 
 </body>
