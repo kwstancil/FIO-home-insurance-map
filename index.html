@@ -448,9 +448,9 @@
         map.setPaintProperty('uszipcodes-fill', 'fill-color', 
         ['case',
           ['all', ['>=', ['get', initialLayer], -7387.01],
-            ['<=', ['get', initialLayer], 62.13]
+            ['<=', ['get', initialLayer], 100.00]
           ], '#ffffb2', // rate between -7,387.01 and 62.13
-          ['all', ['>=', ['get', initialLayer], 62.14],
+          ['all', ['>=', ['get', initialLayer], 100.01],
             ['<=', ['get', initialLayer], 238.54]
           ], '#fecc5c', // rate between 62.14 and 238.54
           ['all', ['>=', ['get', initialLayer], 238.55],
@@ -645,9 +645,9 @@
             // Custom color breaks for the Paid Loss Ratio layer
             ['case',
           ['all', ['>=', ['get', initialLayer], -7387.01],
-            ['<=', ['get', initialLayer], 62.13]
+            ['<=', ['get', initialLayer], 100.00]
           ], '#ffffb2', // rate between -7,387.01 and 62.13
-          ['all', ['>=', ['get', initialLayer], 62.14],
+          ['all', ['>=', ['get', initialLayer], 100.01],
             ['<=', ['get', initialLayer], 238.54]
           ], '#fecc5c', // rate between 62.14 and 238.54
           ['all', ['>=', ['get', initialLayer], 238.55],
@@ -879,7 +879,7 @@
 
     // Define the colors and labels for the Paid Loss Ratio layer
     const paidLossRatioColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026', 'rgba(0,0,0,0.15)'];
-    const paidLossRatioLabels = ['-7,387.01% - 62.13%', '62.14% - 238.54%', '238.55% - 765.98%', '765.99% - 3,066.73%', '3,066.74% - 31,783.18%', 'No Data'];
+    const paidLossRatioLabels = ['Less than 100.00%', '100.01% - 238.54%', '238.55% - 765.98%', '765.99% - 3,066.73%', '3,066.74% - 31,783.18%', 'No Data'];
     const paidLossRatioTitle = 'Paid Loss Ratio';
 
     // Define the colors and labels for the Average Premium layer
